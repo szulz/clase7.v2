@@ -25,5 +25,68 @@
     "code": 3,
     "stock": 90,
     "id": 3
+  },
+  {
+    "title": "Producto 4",
+    "description": "Esto es el cuarto producto",
+    "price": 6000,
+    "thumbnail": "producto4.jpg",
+    "code": 4,
+    "stock": 3,
+    "id": 4
+  },
+  {
+    "title": "Producto 5",
+    "description": "Esto es el quinto producto",
+    "price": 1000,
+    "thumbnail": "producto5.jpg",
+    "code": 5,
+    "stock": 880,
+    "id": 5
+  },
+  {
+    "title": "Producto 6",
+    "description": "Esto es el sexto producto",
+    "price": 9000,
+    "thumbnail": "producto6.jpg",
+    "code": 6,
+    "stock": 7,
+    "id": 6
+  },
+  {
+    "title": "Producto 7",
+    "description": "Esto es el septimo producto",
+    "price": 1800,
+    "thumbnail": "producto7.jpg",
+    "code": 7,
+    "stock": 50,
+    "id": 7
+  },
+  {
+    "title": "Producto 8",
+    "description": "Esto es el octavo producto",
+    "price": 9950,
+    "thumbnail": "producto8.jpg",
+    "code": 8,
+    "stock": 1,
+    "id": 8
+  },
+  {
+    "title": "Producto 9",
+    "description": "Esto es el noveno producto",
+    "price": 250,
+    "thumbnail": "producto9.jpg",
+    "code": 9,
+    "stock": 70,
+    "id": 9
+  },
+  {
+    "title": "Producto 10",
+    "description": "Esto es el decimo producto",
+    "price": 10000,
+    "thumbnail": "producto10.jpg",
+    "code": 10,
+    "stock": 5,
+    "id": 10
   }
 ]

@@ -1,7 +1,7 @@
 const fs = require("fs");
 class ProductManager {
-    constructor(path) {
-        this.path = path;
+    constructor() {
+        this.path = './src/productManager.json';
         this.products = [];
         this.id = 0
     }
@@ -52,7 +52,7 @@ class ProductManager {
         return 'error';
     }
 }
-
+/*
 const productManager = new ProductManager("productManager.json");
 const funcionAsync = async () => {
     await productManager.addProduct({
@@ -83,7 +83,6 @@ const funcionAsync = async () => {
 
 const callFunction = async () => {
     await productManager.getProducts();
-    /*
     await productManager.getProductById(1);
     await productManager.deleteProduct(2);
     await productManager.updateProduct(3, {
@@ -92,7 +91,9 @@ const callFunction = async () => {
         description: 'nueva description',
         code: 85
     });
-    */
+
 }
-//funcionAsync();
-//callFunction();
+funcionAsync();
+callFunction();
+*/
+module.exports = ProductManager;
