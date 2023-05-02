@@ -25,7 +25,6 @@ app.get('/products', async (req, res) => {
 
 app.get('/products/:id', async (req, res) => {
   const id = req.params.id;
-  const limit = req.query.limit;
   const product = await productManager.getProductById(JSON.parse(id));
   res.json(product)
 });
