@@ -25,32 +25,46 @@ class ProductManager {
             let productos = await fs.promises.readFile(this.path, "utf-8");
             const todosLosProductos = JSON.parse(productos);
             return todosLosProductos;
+        } else {
+            console.log('new file path has been created');
+            await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2), "utf-8");
+            return this.products;
         }
-        return 'error';
-    }
+    };
     async getProductById(id) {
-        let allProducts = await this.getProducts();
-        const prodToGet = allProducts.find(prod => prod.id === id);
-        return prodToGet;
-    }
-    async updateProduct(id, updateProps) {
-        let prodToUpdate = await this.getProducts();
-        let newProd = prodToUpdate.find(prod => prod.id === id);
-        Object.assign(newProd, updateProps);
-        await fs.promises.writeFile(this.path, JSON.stringify(prodToUpdate, null, 2), "utf-8");
-        return;
-    }
-    async deleteProduct(id) {
-        let todosLosProductos = await this.getProducts();
-        let newProd = todosLosProductos.find(prod => prod.id === id);
-        const index = todosLosProductos.findIndex(prod => prod.id === newProd.id)
-        if (index !== -1) {
-            todosLosProductos.splice(index, 1);
-            await fs.promises.writeFile(this.path, JSON.stringify(todosLosProductos, null, 2), "utf-8");
-            return;
+        try {
+            let allProducts = await this.getProducts();
+            const prodToGet = allProducts.find(prod => prod.id === id);
+            return prodToGet;
+        } catch (error) {
+            return console.log(error);
         }
-        return 'error';
-    }
+    };
+    async updateProduct(id, updateProps) {
+        try {
+            let prodToUpdate = await this.getProducts();
+            let newProd = prodToUpdate.find(prod => prod.id === id);
+            Object.assign(newProd, updateProps);
+            await fs.promises.writeFile(this.path, JSON.stringify(prodToUpdate, null, 2), "utf-8");
+            return;
+        } catch (error) {
+            return console.log(error);
+        }
+    };
+    async deleteProduct(id) {
+        try {
+            let todosLosProductos = await this.getProducts();
+            let newProd = todosLosProductos.find(prod => prod.id === id);
+            const index = todosLosProductos.findIndex(prod => prod.id === newProd.id)
+            if (index !== -1) {
+                todosLosProductos.splice(index, 1);
+                await fs.promises.writeFile(this.path, JSON.stringify(todosLosProductos, null, 2), "utf-8");
+                return;
+            }
+        } catch (error) {
+            return console.log(error);
+        }
+    };
 }
 /*
 const productManager = new ProductManager("productManager.json");
