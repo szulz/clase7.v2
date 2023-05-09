@@ -1,24 +1,28 @@
+const { error } = require("console");
 const fs = require("fs");
 class ProductManager {
     constructor() {
         this.path = './src/productManager.json';
         this.products = [];
-        this.id = 0
+        this.id = 0;
     }
     async addProduct(product) {
         if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
-            console.log('TODOS LOS CAMPOS SON OBLIGATORIOS');
-            return;
+            throw new Error('All fields are mandatory');
         }
-        const checkCode = this.products.find(req => req.code === product.code);
+        const products = await this.getProducts();
+        const checkCode = products.find(req => req.code === product.code);
         if (checkCode) {
-            console.log('CODIGO YA INGRESADO');
-            return;
+            throw new Error('Code already in use, please try again with another code');
         }
-        this.products.push(product);
-        this.id++;
+        this.id = Math.floor(Math.random() * 10000);
         product.id = this.id;
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2), "utf-8");
+        if (products.find(prod => prod.id === product.id)) {
+            console.log('id repetido');
+            product.id = Math.floor(Math.random() * 10000);
+        };
+        products.push(product);
+        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), "utf-8");
     }
     async getProducts() {
         if (fs.existsSync(this.path)) {
@@ -37,19 +41,30 @@ class ProductManager {
             const prodToGet = allProducts.find(prod => prod.id === id);
             return prodToGet;
         } catch (error) {
-            return console.log(error);
+            return error;
         }
     };
-    async updateProduct(id, updateProps) {
-        try {
-            let prodToUpdate = await this.getProducts();
-            let newProd = prodToUpdate.find(prod => prod.id === id);
-            Object.assign(newProd, updateProps);
-            await fs.promises.writeFile(this.path, JSON.stringify(prodToUpdate, null, 2), "utf-8");
-            return;
-        } catch (error) {
-            return console.log(error);
-        }
+
+    async updateProduct(id, props) {
+        let prodToUpdate = await this.getProducts();
+        let newProd = prodToUpdate.find(prod => prod.id === id);
+        const allowedProps = ['title', 'description', 'price', 'thumbnail', 'code', 'stock'];
+        const prodKeys = Object.keys(props);
+        for (let i = 0; i < prodKeys.length; i++) {
+            if (!allowedProps.includes(prodKeys[i])) {
+                throw new Error('There is one or more properties that do not coincide with the structure of the product');
+            };
+        };
+        if (props.code) {
+            props.code = parseInt(props.code, 10);
+            const checkCode = prodToUpdate.find(req => req.code === props.code)
+            if (checkCode) {
+                throw new Error('There is another product with the same code, please try again with another code');
+            };
+        };
+        let updatedProd = Object.assign(newProd, props);
+        await fs.promises.writeFile(this.path, JSON.stringify(prodToUpdate, null, 2), "utf-8")
+        return updatedProd;
     };
     async deleteProduct(id) {
         try {
@@ -62,7 +77,7 @@ class ProductManager {
                 return;
             }
         } catch (error) {
-            return console.log(error);
+            return error;
         }
     };
 }
