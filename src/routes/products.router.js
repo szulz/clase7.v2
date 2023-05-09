@@ -9,6 +9,11 @@ productsRouter.get('/', async (req, res) => {
     try {
         const productos = await productManager.getProducts();
         const limit = req.query.limit;
+        if (limit) {
+            if (!Number(limit)) {
+                throw new Error(`The limit parameter did not received a valid character`);
+            };
+        }
         if (productos.length >= limit) {
             return res.status(200).send({
                 status: "SUCCESS",
@@ -27,11 +32,11 @@ productsRouter.get('/', async (req, res) => {
             data: productos
         });
     } catch (error) {
-        return console.log(error);
+        res.status(400).send(error.message);
     };
 });
 
-//GET X ID : LISTO
+//GET X ID :  FALTA EL CASO SI LE PONGO UNA LETRA DE PARAMETRO!!!
 productsRouter.get('/:id', async (req, res) => {
     const id = req.params.id;
     const product = await productManager.getProductById(JSON.parse(id));
@@ -49,7 +54,7 @@ productsRouter.get('/:id', async (req, res) => {
 });
 
 
-//CREA PROD Y CHECKEAR POR PROPS : LISTO
+//CREA PROD Y CHECKEAR POR PROPS : LISTO / arreglar lo de thumbnail
 productsRouter.post('/', async (req, res) => {
     try {
         const newProd = req.body;
