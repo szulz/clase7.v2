@@ -36,7 +36,14 @@ cartsRouter.get('/:cid', async (req, res) => {
         res.status(400).send(error.message);
     }
 })
-
+//ruta extra por si no ingreso id
+cartsRouter.get('/', async (req, res) => {
+    try {
+        res.send({ msg: 'Heres a list with all the carts', data: await cartManager.getCarts() });
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+})
 //PASO ID DEL CARRO Y PRODUCTO CON SU ID : LISTO
 cartsRouter.post('/:cid/products/:pid', async (req, res) => {
     try {
