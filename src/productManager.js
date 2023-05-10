@@ -2,7 +2,7 @@ const { error } = require("console");
 const fs = require("fs");
 class ProductManager {
     constructor() {
-        this.path = './src/productManager.json';
+        this.path = './src/db/productManager.json';
         this.products = [];
         this.id = 0;
     }

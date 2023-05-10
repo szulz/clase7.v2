@@ -1,9 +1,9 @@
 [
   {
-    "title": "Producto 2",
+    "title": "newtitle",
     "description": "Esto es el segundo producto",
     "price": 5000,
-    "code": "code2",
+    "code": 99,
     "stock": 99,
     "status": true,
     "category": "sports",
@@ -42,5 +42,16 @@
     "category": "sports",
     "thumbnail": "no image",
     "id": 5796
+  },
+  {
+    "title": "new producto",
+    "description": "new producto",
+    "price": 5000,
+    "code": "9999",
+    "stock": 99,
+    "status": true,
+    "category": "ANY",
+    "thumbnail": "no image",
+    "id": 5096
   }
 ]
