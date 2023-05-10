@@ -31,5 +31,16 @@
     "category": "sports",
     "thumbnail": ".jpg",
     "id": 1680
+  },
+  {
+    "title": "new producto",
+    "description": "new producto",
+    "price": 5000,
+    "code": "550",
+    "stock": 99,
+    "status": true,
+    "category": "sports",
+    "thumbnail": "no image",
+    "id": 5796
   }
 ]

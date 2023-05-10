@@ -6,7 +6,7 @@ const cartManager = new CartManager();
 const ProductManager = require('../productManager.js');
 const productManager = new ProductManager();
 
-//CREO NUEVO CARRO : LISTO
+//CREO NUEVO CARRO
 cartsRouter.post('/', async (req, res) => {
     try {
         let cart = await cartManager.addCart();
@@ -20,7 +20,7 @@ cartsRouter.post('/', async (req, res) => {
     }
 });
 
-//MUESTRA PRODUCTOS EN EL CARRO POR ID DE CARRO : LISTO - SI EL CARRO ESTÁ VACIO!!! y si no se encuentra id
+//MUESTRA PRODUCTOS EN EL CARRO POR ID DE CARRO 
 cartsRouter.get('/:cid', async (req, res) => {
     try {
         let cartProducts = await cartManager.getCartProductById(JSON.parse(req.params.cid))
@@ -36,15 +36,8 @@ cartsRouter.get('/:cid', async (req, res) => {
         res.status(400).send(error.message);
     }
 })
-//ruta extra por si no ingreso id
-cartsRouter.get('/', async (req, res) => {
-    try {
-        res.send({ msg: 'Heres a list with all the carts', data: await cartManager.getCarts() });
-    } catch (error) {
-        res.status(400).send(error.message)
-    }
-})
-//PASO ID DEL CARRO Y PRODUCTO CON SU ID : LISTO
+
+//PASO ID DEL CARRO Y PRODUCTO CON SU ID
 cartsRouter.post('/:cid/products/:pid', async (req, res) => {
     try {
         let allCarts = await cartManager.getCarts();
@@ -78,5 +71,13 @@ cartsRouter.post('/:cid/products/:pid', async (req, res) => {
     }
 })
 
+//x si no ingreso ruta
+cartsRouter.get('/', async (req, res) => {
+    try {
+        res.send({ msg: 'Heres a list with all the carts', data: await cartManager.getCarts() });
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+})
 
 module.exports = cartsRouter;

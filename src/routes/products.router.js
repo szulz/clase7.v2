@@ -4,7 +4,7 @@ const productsRouter = express.Router();
 const ProductManager = require('../productManager.js');
 const productManager = new ProductManager();
 
-// LIMITE O GETALL: LISTO
+// LIMITE O GETALL
 productsRouter.get('/', async (req, res) => {
     try {
         const productos = await productManager.getProducts();
@@ -36,7 +36,7 @@ productsRouter.get('/', async (req, res) => {
     };
 });
 
-//GET X ID :  FALTA EL CASO SI LE PONGO UNA LETRA DE PARAMETRO!!!
+//GET X ID
 productsRouter.get('/:id', async (req, res) => {
     const id = req.params.id;
     const product = await productManager.getProductById(JSON.parse(id));
@@ -54,7 +54,7 @@ productsRouter.get('/:id', async (req, res) => {
 });
 
 
-//CREA PROD Y CHECKEAR POR PROPS : LISTO / arreglar lo de thumbnail
+//CREA PROD Y CHECKEAR POR PROPS
 productsRouter.post('/', async (req, res) => {
     try {
         const newProd = req.body;
@@ -72,7 +72,7 @@ productsRouter.post('/', async (req, res) => {
     };
 });
 
-//MODIFICAR PROPS: LISTO 
+//MODIFICAR PROPS
 productsRouter.put('/:id', async (req, res) => {
     try {
         const idToUpdate = req.params.id;
@@ -91,7 +91,7 @@ productsRouter.put('/:id', async (req, res) => {
     };
 });
 
-//BORRO POR ID: LISTO
+//BORRO POR ID
 productsRouter.delete('/:id', async (req, res) => {
     const id = req.params.id;
     let deletedProd = await productManager.getProductById(JSON.parse(id))

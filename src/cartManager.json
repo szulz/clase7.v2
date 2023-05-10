@@ -25,7 +25,12 @@
     "id": 630
   },
   {
-    "products": [],
+    "products": [
+      {
+        "id": 1680,
+        "quantity": 2
+      }
+    ],
     "id": 6242
   },
   {
