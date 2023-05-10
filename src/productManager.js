@@ -92,48 +92,5 @@ class ProductManager {
         }
     };
 }
-/*
-const productManager = new ProductManager("productManager.json");
-const funcionAsync = async () => {
-    await productManager.addProduct({
-        title: 'Producto 1',
-        description: 'Esto es el primer producto',
-        price: 100,
-        thumbnail: 'producto1.jpg',
-        code: 1,
-        stock: 15
-    });
-    await productManager.addProduct({
-        title: 'Producto 2',
-        description: 'Esto es el segundo producto',
-        price: 900,
-        thumbnail: 'producto2.jpg',
-        code: 2,
-        stock: 5
-    });
-    await productManager.addProduct({
-        title: 'Producto 3',
-        description: 'Esto es el tercer producto',
-        price: 20,
-        thumbnail: 'producto3.jpg',
-        code: 3,
-        stock: 90
-    });
-}
 
-const callFunction = async () => {
-    await productManager.getProducts();
-    await productManager.getProductById(1);
-    await productManager.deleteProduct(2);
-    await productManager.updateProduct(3, {
-        title: 'nuevo producto',
-        stock: 0,
-        description: 'nueva description',
-        code: 85
-    });
-
-}
-funcionAsync();
-callFunction();
-*/
 module.exports = ProductManager;
