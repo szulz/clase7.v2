@@ -33,7 +33,7 @@ cartsRouter.get('/:cid', async (req, res) => {
             data: cartProducts
         })
     } catch (error) {
-        res.status(404).send(error.message);
+        res.status(400).send(error.message);
     }
 })
 
@@ -51,13 +51,21 @@ cartsRouter.post('/:cid/products/:pid', async (req, res) => {
             if (checkId.id === JSON.parse(req.params.pid)) {
                 checkId.quantity++
                 await cartManager.saveFile(allCarts)
-                res.send(`Added to the cart`)
+                res.status(200).send({
+                    status: 'SUCCESS',
+                    msg: 'You have added another product!',
+                    data: dataCartM
+                })
                 return;
             }
         }
         dataCartM.products.push({ id: dataProductM.id, quantity: 1 });
         await cartManager.saveFile(allCarts);
-        res.send('A new product has been added to the cart')
+        res.status(200).send({
+            status: 'SUCCESS',
+            msg: 'A new product has been added to the cart!',
+            data: dataCartM
+        })
     } catch (error) {
         res.status(404).send(error.message)
     }

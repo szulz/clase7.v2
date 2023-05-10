@@ -65,7 +65,6 @@ productsRouter.post('/', async (req, res) => {
             data: newProd
         });
     } catch (error) {
-        console.log({ error })
         res.status(400).send({
             status: 'BAD REQUEST',
             msg: error.message

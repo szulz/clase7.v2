@@ -7,7 +7,18 @@ class ProductManager {
         this.id = 0;
     }
     async addProduct(product) {
-        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
+        const propertiesAllowed = ['title', 'description', 'price', 'thumbnail', 'code', 'stock', 'status', 'category']
+        if (!product.thumbnail) {
+            product.thumbnail = 'no image'
+        }
+        product.status = true;
+        let keys = Object.keys(product);
+        for (let i = 0; i < keys.length; i++) {
+            if (!propertiesAllowed.includes(keys[i])) {
+                throw new Error('Some of the preoperties are not allowed');
+            }
+        }
+        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock || !product.status || !product.category) {
             throw new Error('All fields are mandatory');
         }
         const products = await this.getProducts();
