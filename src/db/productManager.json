@@ -53,5 +53,49 @@
     "category": "ANY",
     "thumbnail": "no image",
     "id": 5096
+  },
+  {
+    "title": "titulo from data",
+    "description": "data",
+    "price": "1000000",
+    "code": "89456564",
+    "stock": "20",
+    "status": true,
+    "category": "any",
+    "thumbnail": "no image",
+    "id": 8322
+  },
+  {
+    "title": "titulo from data",
+    "description": "data",
+    "price": "1000000",
+    "code": "asdsa",
+    "stock": "20",
+    "status": true,
+    "category": "any",
+    "thumbnail": "no image",
+    "id": 4691
+  },
+  {
+    "title": "titulo from data",
+    "description": "data",
+    "price": "1000000",
+    "code": "sadsadasd",
+    "stock": "20",
+    "status": true,
+    "category": "any",
+    "thumbnail": "http://localhost:8080/folleto.jpg",
+    "id": 5500
+  },
+  {
+    "title": "titulo from data",
+    "description": "data",
+    "price": "1000000",
+    "code": "ssss",
+    "stock": "20",
+    "status": true,
+    "category": "any",
+    "thumbnail": "http://localhost:8080/folleto.jpg",
+    "id": 3379
   }
 ]

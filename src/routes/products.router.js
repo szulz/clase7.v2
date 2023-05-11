@@ -3,6 +3,8 @@ const express = require('express');
 const productsRouter = express.Router();
 const ProductManager = require('../productManager.js');
 const productManager = new ProductManager();
+const uploader = require('../utils')
+
 
 // LIMITE O GETALL
 productsRouter.get('/', async (req, res) => {
@@ -38,6 +40,7 @@ productsRouter.get('/', async (req, res) => {
 
 //GET X ID
 productsRouter.get('/:id', async (req, res) => {
+    try{
     const id = req.params.id;
     const product = await productManager.getProductById(JSON.parse(id));
     if (product) {
@@ -51,13 +54,17 @@ productsRouter.get('/:id', async (req, res) => {
         status: "BAD REQUEST",
         msg: `There's no product matching with requested id.`
     });
+}catch (error){
+    res.status(404).send(error.message)
+}
 });
 
 
 //CREA PROD Y CHECKEAR POR PROPS
-productsRouter.post('/', async (req, res) => {
+productsRouter.post('/', uploader.single("thumbnail"), async (req, res) => {
     try {
         const newProd = req.body;
+        newProd.thumbnail = "http://localhost:8080/" + req.file.filename
         await productManager.addProduct(newProd);
         return res.send({
             status: 'Product successfully added!',
@@ -93,6 +100,7 @@ productsRouter.put('/:id', async (req, res) => {
 
 //BORRO POR ID
 productsRouter.delete('/:id', async (req, res) => {
+    try{
     const id = req.params.id;
     let deletedProd = await productManager.getProductById(JSON.parse(id))
     if (deletedProd) {
@@ -107,8 +115,14 @@ productsRouter.delete('/:id', async (req, res) => {
         status: 'BAD REQUEST',
         msg: `There's no product matching with requested id.`
     });
+}catch(error){
+    res.status(404).send(error.message)
+}
 });
 
-
+productsRouter.get("/test/test", (req, res) => {
+    const data = { name: 'Ezequiel', apellido: 'Szulz' }
+    return res.status(200).render("usuarios", data)
+})
 
 module.exports = productsRouter;

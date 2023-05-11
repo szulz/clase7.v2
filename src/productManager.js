@@ -1,5 +1,6 @@
 const { error } = require("console");
 const fs = require("fs");
+
 class ProductManager {
     constructor() {
         this.path = './src/db/productManager.json';
